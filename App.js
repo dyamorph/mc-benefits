@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { StyleSheet, View } from "react-native";
+import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFonts } from "expo-font";
@@ -37,6 +37,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <NavigationContainer onReady={onLayoutRootView}>
         <SafeAreaView style={{ flex: 1 }} edges={["right", "left", "top"]}>
           <MainTabBarNavigator />
