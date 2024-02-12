@@ -1,15 +1,21 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import AllBenefits from "../screens/AllBenefits";
-import CategoryBenefits from "../screens/CategoryBenefits";
-import BenefitInfo from "../screens/BenefitInfo";
 import React from "react";
+import AllBenefits from "../screens/AllBenefits";
+import BenefitInfo from "../screens/BenefitInfo";
+import CategoryBenefits from "../screens/CategoryBenefits";
 
 const Stack = createStackNavigator();
 
 const BenefitsStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="AllBenefits" component={AllBenefits} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="AllBenefits"
+        component={AllBenefits}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="CategoryBenefits"
         component={CategoryBenefits}

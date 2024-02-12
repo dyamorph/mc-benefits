@@ -1,22 +1,23 @@
-import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
-import BenefitsSliderItem from "./BenefitsSliderItem";
-import COLORS from "../constants/COLORS.json";
-import LocationIcon from "../assets/icons/location.svg";
 import { useNavigation } from "@react-navigation/native";
-import menuStore from "../store/menuStore";
 import { observer } from "mobx-react-lite";
+import React, { useRef } from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import LocationIcon from "../assets/icons/location.svg";
+import COLORS from "../constants/COLORS.json";
+import menuStore from "../store/menuStore";
+import BenefitsSliderItem from "./BenefitsSliderItem";
 
-const BenefitsSlider = ({ title, categoryData, images, isFirstSlider }) => {
+const BenefitsSlider = ({ title, categoryData, images, isFirstSlider, index }) => {
   const navigation = useNavigation();
+  const ref = useRef(null);
 
   const handlePress = (categoryData) => {
-    menuStore.setActiveCategory(title);
+    menuStore.setActiveCategory(title, index);
+
     navigation.navigate("CategoryBenefits", {
       category: categoryData,
       title: title,
       images: images,
-      activeCategory: menuStore.activeCategory,
     });
   };
 
@@ -39,6 +40,7 @@ const BenefitsSlider = ({ title, categoryData, images, isFirstSlider }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.slider}
+        ref={ref}
       >
         {categoryData.slice(0, 4).map((item, index) => (
           <BenefitsSliderItem

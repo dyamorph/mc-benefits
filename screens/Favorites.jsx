@@ -1,9 +1,9 @@
-import { StyleSheet, Text, ScrollView, View, Image } from "react-native";
-import React, { useRef } from "react";
-import { observer } from "mobx-react-lite";
-import favoritesStore from "../store/favoritesStore";
-import BenefitsCategoryItem from "../components/BenefitsCategoryItem";
 import { useScrollToTop } from "@react-navigation/native";
+import { observer } from "mobx-react-lite";
+import React, { useRef } from "react";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import BenefitsCategoryItem from "../components/BenefitsCategoryItem";
+import favoritesStore from "../store/favoritesStore";
 
 import COLORS from "../constants/COLORS.json";
 

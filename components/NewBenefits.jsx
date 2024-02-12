@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 const NewDiscounts = () => {
   return (

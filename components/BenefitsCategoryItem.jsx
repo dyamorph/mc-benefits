@@ -1,12 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
-import COLORS from "../constants/COLORS.json";
+import { Image, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LikeIcon from "../assets/icons/like.svg";
 import LikeIconPressed from "../assets/icons/likePressed.svg";
+import COLORS from "../constants/COLORS.json";
 import favoritesStore from "../store/favoritesStore";
-import { useNavigation } from "@react-navigation/native";
-import { LayoutAnimation } from "react-native";
 
 const BenefitsCategoryItem = ({ item, image, inFavorites }) => {
   const [isFavorite, setIsFavorite] = useState(false);

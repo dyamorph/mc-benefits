@@ -1,43 +1,48 @@
-import React, { useRef } from "react";
-import { ScrollView, View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import BenefitsTopMenuItem from "./BenefitsTopMenuItem";
+import { observer } from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Flame from "../assets/icons/flame.svg";
 import COLORS from "../constants/COLORS.json";
 import categoriesData from "../data/CATEGORIES.json";
 import imageStore from "../store/imageStore";
-import Flame from "../assets/icons/flame.svg";
 import menuStore from "../store/menuStore";
-import { observer } from "mobx-react-lite";
+import BenefitsTopMenuItem from "./BenefitsTopMenuItem";
 
 const BenefitsTopMenu = () => {
+  const [scrollInitialized, setScrollInitialized] = useState(false);
   const scrollViewRef = useRef(null);
   const navigation = useNavigation();
   const activeCategory = menuStore.activeCategory;
+
+  useEffect(() => {
+    if (scrollInitialized && scrollViewRef.current) {
+      const buttonOffset = menuStore.activeCategoryIndex * 130;
+      scrollViewRef.current.scrollTo({ x: buttonOffset, animated: true });
+    }
+  }, [scrollInitialized, menuStore.activeCategory]);
 
   const categories = categoriesData.categories
     .filter((category) => category.title !== "Новинки")
     .map((category) => category.title);
 
-  function getDataByCategoryTitle(categoryTitle) {
+  const getDataByCategoryTitle = (categoryTitle) => {
     const categoryData = categoriesData.categories.find(
       (category) => category.title === categoryTitle
     );
     return categoryData ? categoryData.items : [];
-  }
+  };
 
   const handleAllDiscountsPress = () => {
-    menuStore.setActiveCategory("Все скидки");
+    navigation.navigate("AllBenefits");
+  };
 
-    navigation.navigate("AllBenefits", { activeCategory: "Все скидки" });
+  const handleLayout = () => {
+    setScrollInitialized(true);
   };
 
   const handleCategoryPress = (category, index) => {
     menuStore.setActiveCategory(category, index);
-
-    if (scrollViewRef.current) {
-      const buttonOffset = menuStore.activeCategoryIndex * 130;
-      scrollViewRef.current.scrollTo({ x: buttonOffset, animated: true });
-    }
 
     navigation.navigate("CategoryBenefits", {
       category: getDataByCategoryTitle(category),
@@ -53,6 +58,7 @@ const BenefitsTopMenu = () => {
         horizontal
         contentContainerStyle={styles.scrollView}
         showsHorizontalScrollIndicator={false}
+        onLayout={handleLayout}
       >
         <TouchableOpacity
           onPress={handleAllDiscountsPress}
@@ -79,7 +85,6 @@ const BenefitsTopMenu = () => {
             category={category}
             activeCategory={activeCategory}
             handleCategoryPress={() => handleCategoryPress(category, index)}
-            firstCategory={index === 0}
           />
         ))}
       </ScrollView>
@@ -117,7 +122,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter-Semibold",
   },
   activeCategoryText: {
-    color: "white",
+    color: COLORS.white,
   },
   activeCategory: {
     backgroundColor: COLORS.primary,

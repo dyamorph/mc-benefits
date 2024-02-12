@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 const Account = () => {
   return (
-    <View style={{ backgroundColor: "white", flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <Text>Account</Text>
     </View>
   );

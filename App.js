@@ -1,11 +1,15 @@
 import "react-native-gesture-handler";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback } from "react";
-import GlobalStyles from "./globalStyles";
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+  SafeAreaView,
+} from "react-native-safe-area-context";
 
 import MainTabBarNavigator from "./navigation/MainTabBarNavigator";
 
@@ -32,12 +36,12 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer onReady={onLayoutRootView}>
-      <SafeAreaView style={GlobalStyles.droidSafeArea}>
-        <MainTabBarNavigator />
-      </SafeAreaView>
-    </NavigationContainer>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <NavigationContainer onReady={onLayoutRootView}>
+        <SafeAreaView style={{ flex: 1 }} edges={["right", "left", "top"]}>
+          <MainTabBarNavigator />
+        </SafeAreaView>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({});

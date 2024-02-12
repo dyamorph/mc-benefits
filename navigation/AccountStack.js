@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 const AccountStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Account" component={Account} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

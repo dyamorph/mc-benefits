@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import COLORS from "../constants/COLORS.json";
 import { useNavigation } from "@react-navigation/native";
-import favoritesStore from "../store/favoritesStore";
-import LikeIconPressed from "../assets/icons/likePressed";
 import { observer } from "mobx-react-lite";
+import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import LikeIconPressed from "../assets/icons/likePressed";
+import COLORS from "../constants/COLORS.json";
+import favoritesStore from "../store/favoritesStore";
 
 const BenefitsSliderItem = ({ item, image, isFirstSlider, index }) => {
   const navigation = useNavigation();
+
+  const getTitleStyle = () => {
+    return isFirstSlider
+      ? index === 1
+        ? styles.secondElemTitle
+        : styles.firstSliderTitle
+      : styles.title;
+  };
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate("BenefitInfo")} activeOpacity={0.9}>
@@ -25,17 +33,7 @@ const BenefitsSliderItem = ({ item, image, isFirstSlider, index }) => {
           <LikeIconPressed fill={COLORS.primary} />
         </View>
       )}
-      <Text
-        style={
-          isFirstSlider
-            ? index === 1
-              ? styles.secondElemTitle
-              : styles.firstSliderTitle
-            : styles.title
-        }
-      >
-        {item.title}
-      </Text>
+      <Text style={getTitleStyle()}>{item.title}</Text>
       <View style={isFirstSlider ? styles.firstSliderDiscount : styles.discount}>
         <Text style={styles.discountText}>{item.discount}</Text>
       </View>

@@ -1,9 +1,10 @@
-import { StyleSheet, View, Text, FlatList } from "react-native";
-import React from "react";
 import { useRoute } from "@react-navigation/native";
+import { observer } from "mobx-react-lite";
+import React from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import BenefitsCategoryItem from "../components/BenefitsCategoryItem";
-import COLORS from "../constants/COLORS.json";
 import BenefitsTopMenu from "../components/BenefitsTopMenu";
+import COLORS from "../constants/COLORS.json";
 
 const CategoryBenefits = () => {
   const route = useRoute();
@@ -28,7 +29,7 @@ const CategoryBenefits = () => {
   );
 };
 
-export default CategoryBenefits;
+export default observer(CategoryBenefits);
 
 const styles = StyleSheet.create({
   container: {

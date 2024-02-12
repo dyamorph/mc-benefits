@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import SaleIcon from "../assets/icons/sale.svg";
-import HeartIcon from "../assets/icons/heart.svg";
 import AccountIcon from "../assets/icons/account.svg";
+import HeartIcon from "../assets/icons/heart.svg";
+import SaleIcon from "../assets/icons/sale.svg";
 import COLORS from "../constants/COLORS.json";
+import AccountStack from "./AccountStack";
 import BenefitsStack from "./BenefitsStack";
 import FavoritesStack from "./FavoritesStack";
-import AccountStack from "./AccountStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +26,9 @@ const MainTabBarNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <SaleIcon fill={focused ? COLORS.primary : COLORS.paragraph} />
           ),
+          tabBarOnPress: ({ defaultHandler }) => {
+            defaultHandler();
+          },
         }}
       />
       <Tab.Screen
