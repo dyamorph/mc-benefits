@@ -15,7 +15,11 @@ const MainTabBarNavigator = () => {
       screenOptions={{
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.paragraph,
-        tabBarLabelStyle: { fontFamily: "SF-SemiBold", fontSize: 12, marginTop: -2 },
+        tabBarLabelStyle: {
+          fontFamily: "SF-SemiBold",
+          fontSize: 12,
+          marginTop: -2,
+        },
       }}
     >
       <Tab.Screen
@@ -26,9 +30,6 @@ const MainTabBarNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <SaleIcon fill={focused ? COLORS.primary : COLORS.paragraph} />
           ),
-          tabBarOnPress: ({ defaultHandler }) => {
-            defaultHandler();
-          },
         }}
       />
       <Tab.Screen

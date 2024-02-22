@@ -1,11 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useRef, useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Flame from "../assets/icons/flame.svg";
 import COLORS from "../constants/COLORS.json";
 import categoriesData from "../data/CATEGORIES.json";
-import imageStore from "../store/imageStore";
 import menuStore from "../store/menuStore";
 import BenefitsTopMenuItem from "./BenefitsTopMenuItem";
 
@@ -26,15 +31,8 @@ const BenefitsTopMenu = () => {
     .filter((category) => category.title !== "Новинки")
     .map((category) => category.title);
 
-  const getDataByCategoryTitle = (categoryTitle) => {
-    const categoryData = categoriesData.categories.find(
-      (category) => category.title === categoryTitle
-    );
-    return categoryData ? categoryData.items : [];
-  };
-
   const handleAllDiscountsPress = () => {
-    navigation.navigate("AllBenefits");
+    menuStore.setActiveCategory("Все скидки");
   };
 
   const handleLayout = () => {
@@ -43,12 +41,6 @@ const BenefitsTopMenu = () => {
 
   const handleCategoryPress = (category, index) => {
     menuStore.setActiveCategory(category, index);
-
-    navigation.navigate("CategoryBenefits", {
-      category: getDataByCategoryTitle(category),
-      images: imageStore.getCategoryImagesByTitle(category),
-      title: category,
-    });
   };
 
   return (
@@ -62,7 +54,10 @@ const BenefitsTopMenu = () => {
       >
         <TouchableOpacity
           onPress={handleAllDiscountsPress}
-          style={[styles.category, activeCategory === "Все скидки" && styles.activeCategory]}
+          style={[
+            styles.category,
+            activeCategory === "Все скидки" && styles.activeCategory,
+          ]}
         >
           <Flame
             width={20}
@@ -95,7 +90,11 @@ const BenefitsTopMenu = () => {
 export default observer(BenefitsTopMenu);
 
 const styles = StyleSheet.create({
-  container: { borderBottomWidth: 1, borderBottomColor: "#F0F0F5", borderStyle: "solid" },
+  container: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0F5",
+    borderStyle: "solid",
+  },
   scrollView: {
     paddingVertical: 12,
     paddingHorizontal: 16,

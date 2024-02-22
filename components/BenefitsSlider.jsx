@@ -1,24 +1,28 @@
-import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React, { useRef } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import LocationIcon from "../assets/icons/location.svg";
 import COLORS from "../constants/COLORS.json";
 import menuStore from "../store/menuStore";
 import BenefitsSliderItem from "./BenefitsSliderItem";
 
-const BenefitsSlider = ({ title, categoryData, images, isFirstSlider, index }) => {
-  const navigation = useNavigation();
+const BenefitsSlider = ({
+  title,
+  categoryData,
+  images,
+  isFirstSlider,
+  index,
+}) => {
   const ref = useRef(null);
 
-  const handlePress = (categoryData) => {
+  const handlePress = () => {
     menuStore.setActiveCategory(title, index);
-
-    navigation.navigate("CategoryBenefits", {
-      category: categoryData,
-      title: title,
-      images: images,
-    });
   };
 
   return (
@@ -52,8 +56,13 @@ const BenefitsSlider = ({ title, categoryData, images, isFirstSlider, index }) =
           />
         ))}
         {categoryData.length > 4 && (
-          <TouchableOpacity style={styles.seeMoreCard} onPress={() => handlePress(categoryData)}>
-            <Text style={styles.seeMoreText}>Смотреть ещё {categoryData.length - 4}</Text>
+          <TouchableOpacity
+            style={styles.seeMoreCard}
+            onPress={() => handlePress(categoryData)}
+          >
+            <Text style={styles.seeMoreText}>
+              Смотреть ещё {categoryData.length - 4}
+            </Text>
           </TouchableOpacity>
         )}
       </ScrollView>
