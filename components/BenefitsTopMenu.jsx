@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -17,7 +16,6 @@ import BenefitsTopMenuItem from "./BenefitsTopMenuItem";
 const BenefitsTopMenu = () => {
   const [scrollInitialized, setScrollInitialized] = useState(false);
   const scrollViewRef = useRef(null);
-  const navigation = useNavigation();
   const activeCategory = menuStore.activeCategory;
 
   useEffect(() => {

@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     flex: 1,
   },
+  content: {
+    paddingTop: 24,
+  },
 });
 
 export default BenefitsMainPage;
